@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLab - Лабораторная работа по Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-[#6366F1] shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-2xl font-bold text-white">EduLab</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Работа с файлами</h2>
+            <p class="text-gray-600">Лабораторная работа по изучению чтения, записи и обработки файлов в Python</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Цель</h3>
+                <p class="text-gray-600 mb-6">
+                    Целью данной лабораторной работы является изучение методов чтения, записи и обработки текстовых файлов с помощью языка программирования Python.
+                </p>
+
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">План</h3>
+                <ol class="list-decimal pl-6 text-gray-600 mb-6">
+                    <li>Изучить встроенные Python-функции для работы с файлами</li>
+                    <li>Написать программу, которая анализирует содержимое текстового файла</li>
+                    <li>Реализовать функцию для подсчета количества строк, слов и символов в файле</li>
+                    <li>Записать результаты анализа в новый текстовый файл</li>
+                    <li>Протестировать программу на различных типах файлов</li>
+                </ol>
+
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Теория</h3>
+                <p class="text-gray-600 mb-6">
+                    Работа с файлами в Python осуществляется с помощью встроенных функций open(), read(), write() и других. Для чтения файла используется метод read(), который возвращает содержимое файла в виде строки. Для записи данных в файл применяется метод write(). Также доступны методы readlines() и writelines() для работы со списками строк.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Примеры реализации</h3>
+
+                <div class="bg-gray-800 text-white rounded-lg p-4 mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-semibold">Базовый пример</h4>
+                        <button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-1 px-2 rounded copy-btn">Копировать</button>
+                    </div>
+                    <pre class="hljs"><code>
+import os
+
+def analyze_file(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    lines = content.count('\n') + 1
+    words = len(content.split())
+    chars = len(content)
+
+    return lines, words, chars
+
+def main():
+    input_file = input("Введите путь к файлу: ")
+    output_file = os.path.splitext(input_file)[0] + "_metrics.txt"
+
+    lines, words, chars = analyze_file(input_file)
+
+    with open(output_file, 'w') as file:
+        file.write(f"Количество строк: {lines}\n")
+        file.write(f"Количество слов: {words}\n") 
+        file.write(f"Количество символов: {chars}")
+
+    print(f"Метрики файла сохранены в {output_file}")
+
+if __name__ == "__main__":
+    main()
+                    </code></pre>
+                    <p class="text-gray-400">
+                        Этот код запрашивает путь к файлу у пользователя, анализирует его содержимое и сохраняет основные метрики (количество строк, слов и символов) в новый файл с расширением "_metrics.txt".
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 text-white rounded-lg p-4 mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-semibold">Расширенный пример</h4>
+                        <button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-1 px-2 rounded copy-btn">Копировать</button>
+                    </div>
+                    <pre class="hljs"><code>
+import os
+import shutil
+
+def analyze_file(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    lines = content.count('\n') + 1
+    words = len(content.split())
+    chars = len(content)
+
+    return lines, words, chars
+
+def process_directory(directory_path):
+    for filename in os.listdir(directory_path):
+        file_path = os.path.join(directory_path, filename)
+        if os.path.isfile(file_path):
+            lines, words, chars = analyze_file(file_path)
+            output_file = os.path.splitext(filename)[0] + "_metrics.txt"
+            output_path = os.path.join(directory_path, output_file)
+            with open(output_path, 'w') as file:
+                file.write(f"Файл: {filename}\n")
+                file.write(f"Количество строк: {lines}\n")
+                file.write(f"Количество слов: {words}\n")
+                file.write(f"Количество символов: {chars}\n")
+            print(f"Метрики файла {filename} сохранены в {output_path}")
+        elif os.path.isdir(file_path):
+            new_directory = os.path.join(directory_path, filename + "_processed")
+            os.makedirs(new_directory, exist_ok=True)
+            process_directory(new_directory)
+            shutil.move(file_path, new_directory)
+
+def main():
+    input_directory = input("Введите путь к папке: ")
+    process_directory(input_directory)
+
+if __name__ == "__main__":
+    main()
+                    </code></pre>
+                    <p class="text-gray-400">
+                        Этот расширенный пример обрабатывает все файлы в заданной директории, вычисляет метрики для каждого файла и сохраняет их в отдельных файлах с суффиксом "_metrics.txt". Кроме того, он перемещает обработанные файлы в новую папку с суффиксом "_processed".
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Дополнительные материалы</h3>
+                <ul class="list-disc pl-6 text-gray-600">
+                    <li>
+                        <a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files" class="text-[#6366F1] hover:underline">
+                            Официальная документация Python: Чтение и запись файлов
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://realpython.com/read-write-files-python/" class="text-[#6366F1] hover:underline">
+                            Real Python: Чтение и запись файлов в Python
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.w3schools.com/python/python_file_handling.asp" class="text-[#6366F1] hover:underline">
+                            W3Schools: Обработка файлов в Python
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Прикрепить скриншот</h3>
+                <div class="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                    <img id="screenshot-preview" src="/api/placeholder/800/500" alt="Placeholder" class="w-full h-auto rounded-lg mb-2">
+                    <input type="file" class="w-full" onchange="previewImage(event)" />
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        copyButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const codeElement = btn.parentNode.nextElementSibling;
+                navigator.clipboard.writeText(codeElement.textContent.trim());
+                btn.textContent = 'Скопировано!';
+                setTimeout(() => {
+                    btn.textContent = 'Копировать';
+                }, 2000);
+            });
+        });
+
+        function previewImage(event) {
+            const preview = document.getElementById('screenshot-preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+            preview.onload = function() {
+                URL.revokeObjectURL(preview.src)
+            }
+        }
+    </script>
+</body>
+</html>
