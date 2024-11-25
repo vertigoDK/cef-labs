@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLab - Работа с несколькими экранами: Меню и настройка</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex: 1;
+    }
+    .code-container {
+        position: relative;
+    }
+</style>
+<body class="bg-gray-50">
+    <header class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto">
+            <a href="/" class="inline-block">
+                <h1 class="text-3xl font-bold relative">
+                    <span class="relative">
+                        EduLab
+                    </span>
+                </h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Работа с несколькими экранами: Меню и настройка</h2>
+            <p class="text-gray-600">Лабораторная работа по созданию приложения с использованием ScreenManager для создания многокранового интерфейса с возможностью изменения настроек (например, цвета фона).</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Цель</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li>Изучить использование <strong>ScreenManager</strong> для создания многокрановых приложений.</li>
+                <li>Реализовать переходы между экранами.</li>
+                <li>Научиться передавать данные между экранами (например, изменение цвета фона).</li>
+                <li>Создать простое меню с кнопкой "Настройки" и экран настроек, где пользователь может выбирать цвет фона для главного экрана.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Теория</h3>
+            <p class="text-gray-600 mb-6">
+                В Kivy можно использовать класс <strong>ScreenManager</strong> для переключения между экранами в одном приложении. Каждый экран является объектом класса <strong>Screen</strong>, и через <strong>ScreenManager</strong> можно добавлять и управлять этими экранами.
+            </p>
+
+            <p class="text-gray-600 mb-6">
+                <strong>ScreenManager</strong> позволяет переключаться между экранами с помощью различных методов, таких как <strong>current</strong>, который задаёт активный экран. В нашем случае мы создадим два экрана: главный экран и экран настроек.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Как работает ScreenManager</h3>
+            <p class="text-gray-600 mb-6">
+                Чтобы управлять несколькими экранами в Kivy, необходимо создать экземпляр <strong>ScreenManager</strong>, добавить в него экраны (каждый из которых является экземпляром класса <strong>Screen</strong>) и настроить логику переключения.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Пример реализации с экраном настроек</h3>
+            <p class="text-gray-600 mb-6">Ниже приведён пример кода для создания приложения с экраном настроек, где пользователь может выбрать цвет фона для главного экрана:</p>
+            <div class="code-container mb-4">
+                <pre class="hljs"><code>from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.button import Button
+from kivy.uix.colorpicker import ColorPicker
+from kivy.uix.boxlayout import BoxLayout
+
+class MainScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        btn = Button(text="Настройки", on_press=self.go_to_settings)
+        self.add_widget(btn)
+
+    def go_to_settings(self, instance):
+        self.manager.current = "settings_screen"  # Переключаемся на экран настроек
+
+class SettingsScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation="vertical")
+
+        # Создаем ColorPicker для выбора цвета фона
+        self.color_picker = ColorPicker()
+        layout.add_widget(self.color_picker)
+
+        # Кнопка для применения выбранного цвета
+        btn_apply = Button(text="Применить", on_press=self.apply_color)
+        layout.add_widget(btn_apply)
+
+        # Кнопка для возврата в главное меню
+        btn_back = Button(text="Вернуться в меню", on_press=self.go_back)
+        layout.add_widget(btn_back)
+
+        self.add_widget(layout)
+
+    def apply_color(self, instance):
+        """Применить выбранный цвет фона на главный экран"""
+        selected_color = self.color_picker.color
+        self.manager.get_screen("main_screen").background_color = selected_color  # Передаем цвет на главный экран
+
+    def go_back(self, instance):
+        self.manager.current = "main_screen"  # Переключаемся обратно на главный экран
+
+class MyApp(App):
+    def build(self):
+        sm = ScreenManager()
+
+        # Добавляем экраны в ScreenManager
+        sm.add_widget(MainScreen(name="main_screen"))
+        sm.add_widget(SettingsScreen(name="settings_screen"))
+
+        return sm
+
+if __name__ == "__main__":
+    MyApp().run()</code></pre>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                В этом примере:
+                <ul class="list-disc pl-6 text-gray-600 mb-6">
+                    <li>Мы создаём два экрана: главный экран и экран настроек.</li>
+                    <li>На главном экране есть кнопка "Настройки", которая переходит на экран настроек.</li>
+                    <li>На экране настроек есть виджет <strong>ColorPicker</strong> для выбора цвета фона и кнопка "Применить", которая изменяет фон главного экрана.</li>
+                    <li>Кнопка "Вернуться в меню" позволяет вернуться на главный экран.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Дополнительная литература</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li><a href="https://kivy.org/doc/stable/" class="text-indigo-600">Официальная документация Kivy</a> - полный справочник по фреймворку Kivy.</li>
+                <li><a href="https://realpython.com/mobile-app-kivy-python/" class="text-indigo-600">Руководство по созданию мобильных приложений с Kivy</a> - отличное введение для начинающих.</li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

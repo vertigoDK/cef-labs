@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLab - Таймер с анимациями на Kivy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex: 1;
+    }
+    .code-container {
+        position: relative;
+    }
+</style>
+<body class="bg-gray-50">
+    <header class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto">
+            <a href="/" class="inline-block">
+                <h1 class="text-3xl font-bold relative">
+                    <span class="relative">
+                        EduLab
+                    </span>
+                </h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Таймер с анимациями на Kivy</h2>
+            <p class="text-gray-600">Лабораторная работа по созданию приложения с таймером и анимациями в фреймворке Kivy.</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Цель</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li>Освоить основы создания анимаций в Kivy.</li>
+                <li>Использовать таймеры и анимации для улучшения визуальных эффектов.</li>
+                <li>Научиться изменять стили кнопок и фонов в процессе работы таймера.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Теория</h3>
+            <p class="text-gray-600 mb-6">
+                В Kivy можно использовать <strong>Clock.schedule_interval()</strong> для создания таймеров и обновлений состояния каждую секунду. Для создания анимаций применяется класс <strong>Animation</strong>, который позволяет изменять различные свойства виджетов, такие как цвет, размер и положение.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Как работает таймер и анимации в Kivy</h3>
+            <p class="text-gray-600 mb-6">
+                Таймер в Kivy обновляется каждую секунду с помощью <strong>Clock.schedule_interval()</strong>, а анимации позволяют динамически изменять состояние интерфейса, например, менять цвет кнопки по мере отсчёта времени.
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Пример реализации таймера с анимациями</h3>
+            <p class="text-gray-600 mb-6">Ниже приведён пример кода для создания таймера с анимациями:</p>
+            <div class="code-container mb-4">
+                <pre class="hljs"><code>from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.clock import Clock
+from kivy.animation import Animation
+
+class TimerApp(App):
+    def build(self):
+        self.layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
+
+        # Ввод времени
+        self.time_input = TextInput(hint_text="Введите время в секундах", font_size=32, multiline=False)
+        self.layout.add_widget(self.time_input)
+
+        # Метка для отображения времени
+        self.time_label = Label(text="00:00", font_size=64)
+        self.layout.add_widget(self.time_label)
+
+        # Кнопка старта
+        self.start_button = Button(text="Запустить таймер", font_size=32, size_hint=(1, 0.2))
+        self.start_button.bind(on_press=self.start_timer)
+        self.layout.add_widget(self.start_button)
+
+        # Переменная для отсчёта времени
+        self.time_left = 0
+        self.is_running = False
+
+        return self.layout
+
+    def start_timer(self, instance):
+        """Запуск таймера с анимацией"""
+        if self.is_running:
+            return  # Если таймер уже работает, ничего не делаем
+
+        # Получаем время из текстового поля
+        try:
+            self.time_left = int(self.time_input.text)
+        except ValueError:
+            self.time_label.text = "Ошибка! Введите число."
+            return
+
+        self.is_running = True
+        self.start_button.text = "Остановить"
+        self.start_button.background_color = (1, 0, 0, 1)  # Красный цвет
+
+        # Анимация изменения цвета кнопки
+        anim = Animation(background_color=(0, 1, 0, 1), duration=self.time_left)  # Зеленый цвет
+        anim.start(self.start_button)
+
+        # Запуск таймера
+        Clock.schedule_interval(self.update_timer, 1)
+
+    def update_timer(self, dt):
+        """Обновление времени"""
+        if self.time_left > 0:
+            self.time_left -= 1
+            minutes = self.time_left // 60
+            seconds = self.time_left % 60
+            self.time_label.text = f"{minutes:02}:{seconds:02}"
+        else:
+            self.stop_timer()
+
+    def stop_timer(self):
+        """Остановка таймера"""
+        self.is_running = False
+        self.start_button.text = "Запустить таймер"
+        self.start_button.background_color = (0, 0, 1, 1)  # Синий цвет
+        Clock.unschedule(self.update_timer)
+
+if __name__ == '__main__':
+    TimerApp().run()</code></pre>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                В этом примере:
+                <ul class="list-disc pl-6 text-gray-600 mb-6">
+                    <li>Мы создаём кнопку для запуска таймера.</li>
+                    <li>Каждую секунду таймер обновляется, и остающееся время отображается в формате ММ:СС.</li>
+                    <li>Как только время заканчивается, на экране появляется сообщение "Время вышло!".</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Дополнительная литература</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li><a href="https://kivy.org/doc/stable/" class="text-indigo-600">Официальная документация Kivy</a> - полный справочник по фреймворку Kivy.</li>
+                <li><a href="https://realpython.com/mobile-app-kivy-python/" class="text-indigo-600">Руководство по созданию мобильных приложений с Kivy</a> - отличное введение для начинающих.</li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

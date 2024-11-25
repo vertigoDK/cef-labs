@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLab - Работа с виджетами: Простейший калькулятор</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex: 1;
+    }
+    .code-container {
+        position: relative;
+    }
+</style>
+<body class="bg-gray-50">
+    <header class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto">
+            <a href="/" class="inline-block">
+                <h1 class="text-3xl font-bold relative">
+                    <span class="relative">
+                        EduLab
+                    </span>
+                </h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Работа с виджетами: Простейший калькулятор</h2>
+            <p class="text-gray-600">Лабораторная работа по освоению работы с виджетами Kivy: TextInput, Button, Label и BoxLayout для создания калькулятора.</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Цель</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li>Освоить работу с виджетами <strong>TextInput</strong>, <strong>Button</strong>, <strong>Label</strong> и <strong>BoxLayout</strong> в Kivy.</li>
+                <li>Научиться обрабатывать события нажатия на кнопки.</li>
+                <li>Реализовать простое приложение для выполнения арифметических операций.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Теория</h3>
+            <p class="text-gray-600 mb-6">
+                В Kivy для создания графического интерфейса используются различные виджеты. Например, <strong>TextInput</strong> позволяет вводить текст, <strong>Button</strong> — добавлять кнопки, а <strong>Label</strong> — отображать информацию. Виджеты можно компонировать с помощью <strong>BoxLayout</strong> или других компоновок.
+            </p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Практическая часть</h3>
+            <h4 class="text-xl font-bold text-gray-900 mb-4">Шаг 1. Создание структуры калькулятора</h4>
+            <p class="text-gray-600 mb-6">Создайте структуру приложения с двумя текстовыми полями для ввода чисел, кнопками для арифметических операций и меткой для отображения результата.</p>
+
+            <h4 class="text-xl font-bold text-gray-900 mb-4">Шаг 2. Реализация калькулятора</h4>
+            <p class="text-gray-600 mb-6">Создайте файл <code>main.py</code> и используйте следующий код для реализации калькулятора:</p>
+            <div class="code-container mb-4">
+                <pre class="hljs"><code>from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+
+class CalculatorApp(App):
+    def build(self):
+        self.result_label = Label(text="0", font_size=32)  # Место для отображения результата
+
+        # Текстовые поля для ввода чисел
+        self.num1_input = TextInput(font_size=32, multiline=False, input_filter='float')  # Первый ввод
+        self.num2_input = TextInput(font_size=32, multiline=False, input_filter='float')  # Второй ввод
+
+        # Кнопки операций
+        self.add_button = Button(text="+", font_size=32)
+        self.subtract_button = Button(text="-", font_size=32)
+        self.multiply_button = Button(text="*", font_size=32)
+        self.divide_button = Button(text="/", font_size=32)
+
+        # Связываем кнопки с действиями
+        self.add_button.bind(on_press=self.add)
+        self.subtract_button.bind(on_press=self.subtract)
+        self.multiply_button.bind(on_press=self.multiply)
+        self.divide_button.bind(on_press=self.divide)
+
+        # Компоновка виджетов
+        layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        layout.add_widget(self.result_label)
+
+        # Ввод чисел
+        input_layout = BoxLayout(orientation='horizontal', spacing=10)
+        input_layout.add_widget(self.num1_input)
+        input_layout.add_widget(self.num2_input)
+        layout.add_widget(input_layout)
+
+        # Кнопки операций
+        button_layout = BoxLayout(orientation='horizontal', spacing=10)
+        button_layout.add_widget(self.add_button)
+        button_layout.add_widget(self.subtract_button)
+        button_layout.add_widget(self.multiply_button)
+        button_layout.add_widget(self.divide_button)
+        layout.add_widget(button_layout)
+
+        return layout
+
+    # Обработчики для арифметических операций
+    def add(self, instance):
+        num1 = float(self.num1_input.text) if self.num1_input.text else 0
+        num2 = float(self.num2_input.text) if self.num2_input.text else 0
+        self.result_label.text = str(num1 + num2)
+
+    def subtract(self, instance):
+        num1 = float(self.num1_input.text) if self.num1_input.text else 0
+        num2 = float(self.num2_input.text) if self.num2_input.text else 0
+        self.result_label.text = str(num1 - num2)
+
+    def multiply(self, instance):
+        num1 = float(self.num1_input.text) if self.num1_input.text else 0
+        num2 = float(self.num2_input.text) if self.num2_input.text else 0
+        self.result_label.text = str(num1 * num2)
+
+    def divide(self, instance):
+        num1 = float(self.num1_input.text) if self.num1_input.text else 0
+        num2 = float(self.num2_input.text) if self.num2_input.text else 0
+        if num2 != 0:
+            self.result_label.text = str(num1 / num2)
+        else:
+            self.result_label.text = "Ошибка: деление на 0"
+
+# Запуск приложения
+if __name__ == '__main__':
+    CalculatorApp().run()</code></pre>
+            </div>
+
+            <h4 class="text-xl font-bold text-gray-900 mb-4">Шаг 3. Пояснение к коду:</h4>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li><strong>TextInput:</strong> Используется для ввода чисел.</li>
+                <li><strong>Button:</strong> Каждая кнопка связана с обработчиком событий (например, <code>add</code> для сложения).</li>
+                <li><strong>BoxLayout:</strong> Для компоновки виджетов вертикально и горизонтально.</li>
+                <li><strong>Label:</strong> Показывает результат операции.</li>
+            </ul>
+
+            <h4 class="text-xl font-bold text-gray-900 mb-4">Шаг 4. Запуск и проверка:</h4>
+            <p class="text-gray-600 mb-6">Запустите приложение с помощью команды:</p>
+            <div class="code-container mb-4">
+                <pre class="hljs"><code>python main.py</code></pre>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Вывод и анализ</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li>Вы научились работать с виджетами Kivy: <strong>TextInput</strong>, <strong>Button</strong>, <strong>Label</strong> и <strong>BoxLayout</strong>.</li>
+                <li>Освоили взаимодействие с пользователем через обработку нажатий на кнопки.</li>
+                <li>Применили компоновку виджетов для создания интерфейса калькулятора.</li>
+            </ul>
+        </div>
+        <div class="mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Дополнительная литература</h3>
+            <ul class="list-decimal pl-6 text-gray-600 mb-6">
+                <li><strong>"Kivy – интерактивные графические приложения на Python"</strong> — Автор: Михаил Корбут. Книга охватывает основы работы с Kivy и даёт примеры для создания различных приложений.</li>
+                <li><strong>"Python and Kivy – Building Mobile Applications"</strong> — Автор: Nicholas Owe. В книге рассматриваются мобильные приложения с использованием Kivy, от простых до сложных.</li>
+                <li><strong>Официальная документация Kivy:</strong> <a href="https://kivy.org/doc/stable/" target="_blank" class="text-indigo-600">https://kivy.org/doc/stable/</a>. Полное руководство по работе с библиотекой Kivy, включая примеры и описание виджетов.</li>
+                <li><strong>Документация по Python:</strong> <a href="https://docs.python.org/3/" target="_blank" class="text-indigo-600">https://docs.python.org/3/</a>. Для более глубокого понимания языка Python, используемого для разработки с Kivy.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Что делать дальше?</h3>
+            <p class="text-gray-600 mb-6">
+                После выполнения лабораторной работы вы можете расширить функциональность калькулятора, добавив поддержку более сложных операций, например, возведение в степень или вычисление квадратных корней. Также можно улучшить интерфейс, добавив стилизацию кнопок и ввод с клавиатуры.
+            </p>
+            <p class="text-gray-600 mb-6">
+                Далее вы можете попробовать разрабатывать другие приложения с использованием Kivy, такие как список задач или чат. Это поможет закрепить изученные концепции и навыки работы с виджетами.
+            </p>
+            <p class="text-gray-600 mb-6">
+                Не забудьте изучить поддержку мобильных платформ в Kivy, если вы хотите сделать свои приложения доступными на Android или iOS.
+            </p>
+        </div>
+
+    </main>
+
+</body>
+</html>

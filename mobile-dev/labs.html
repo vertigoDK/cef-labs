@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLab - Платформа для лабораторных работ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-indigo-600 text-white p-4">
+        <div class="container mx-auto">
+            <a href="/" class="inline-block">
+                <h1 class="text-3xl font-bold relative">
+                    <span class="relative">
+                        EduLab
+                    </span>
+                </h1>
+            </a>
+        </div>
+    </header>
+    
+    
+
+    <main class="container mx-auto mt-12 p-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Лабораторная работа №1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-indigo-300">
+                <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                <div class="p-6">
+                    <!-- Добавим бейдж для номера лабораторной -->
+                    <div class="flex items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Лабораторная работа №1</span>
+                        <span class="ml-2 text-gray-400 text-sm">~40 минут</span>
+                    </div>
+            
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        Введение в Kivy: Первое приложение
+                        <svg class="w-5 h-5 ml-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </h3>
+            
+                    <p class="text-gray-600 mb-4">Изучите разработку мобильных приложений через практические задания и реальные проекты.</p>
+            
+                    <!-- Добавим теги для ключевых тем -->
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Kivy</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">GUI</span>
+                    </div>
+            
+                    <!-- Кнопка "Начать выполнение" -->
+                    <div class="mb-4">
+                        <a href="/mobile-dev/lab1.html" class="group bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            Начать выполнение
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+            
+                    <!-- Кнопка "Просмотр на GitHub" -->
+                    <div class="mt-4">
+                        <a href="https://github.com/vertigoDK/cef-labs/tree/main/mobile-apps/lab-1" target="_blank" class="group bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            <img src="../assets/svg/github.svg" alt="GitHub" class="w-5 h-5 mr-2"/>
+                            Просмотр на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <!-- Лабораторная работа №2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-indigo-300">
+                <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                <div class="p-6">
+                    <!-- Добавим бейдж для номера лабораторной -->
+                    <div class="flex items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Лабораторная работа №2</span>
+                        <span class="ml-2 text-gray-400 text-sm">~45 минут</span> <!-- Время изменено на более реалистичное -->
+                    </div>
+            
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        Работа с виджетами: Простейший калькулятор
+                        <svg class="w-5 h-5 ml-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </h3>
+            
+                    <p class="text-gray-600 mb-4">Создайте калькулятор с основными функциями в Kivy.</p> <!-- Описание сокращено -->
+            
+                    <!-- Добавим теги для ключевых тем -->
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Kivy</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">GUI</span>
+                    </div>
+            
+                    <div class="mb-4">
+                        <a href="/mobile-dev/lab2.html" class="group bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            Начать выполнение
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+            
+                    <!-- Кнопка "Просмотр на GitHub" -->
+                    <div class="mt-4">
+                        <a href="https://github.com/vertigoDK/cef-labs/tree/main/mobile-apps/lab-2" target="_blank" class="group bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            <img src="../assets/svg/github.svg" alt="GitHub" class="w-5 h-5 mr-2"/>
+                            Просмотр на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Лабораторная работа №3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-indigo-300">
+                <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                <div class="p-6">
+                    <!-- Добавим бейдж для номера лабораторной -->
+                    <div class="flex items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Лабораторная работа №3</span>
+                        <span class="ml-2 text-gray-400 text-sm">~60 минут</span>
+                    </div>
+            
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        Обработка данных: Конвертер валют
+                        <svg class="w-5 h-5 ml-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </h3>
+            
+                    <p class="text-gray-600 mb-4">Изучите разработку мобильных приложений через практические задания и реальные проекты.</p>
+                    
+                    <!-- Добавим теги для ключевых тем -->
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Kivy</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">GUI</span>
+                    </div>
+            
+                    <div class="mb-4">
+                        <a href="/mobile-dev/lab3.html" class="group bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            Начать выполнение
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+            
+                    <!-- Кнопка "Просмотр на GitHub" -->
+                    <div class="mt-4">
+                        <a href="https://github.com/vertigoDK/cef-labs/tree/main/mobile-apps/lab-3" target="_blank" class="group bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            <img src="../assets/svg/github.svg" alt="GitHub" class="w-5 h-5 mr-2"/>
+                            Просмотр на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Лабораторная работа №5 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-indigo-300">
+                <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                <div class="p-6">
+                    <!-- Добавим бейдж для номера лабораторной -->
+                    <div class="flex items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Лабораторная работа №4</span>
+                        <span class="ml-2 text-gray-400 text-sm">~35 минут</span>
+                    </div>
+            
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        Анимации и стилизация: Таймер с эффектами
+                        <svg class="w-5 h-5 ml-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </h3>
+            
+                    <p class="text-gray-600 mb-4">Изучите разработку мобильных приложений через практические задания и реальные проекты.</p>
+                    
+                    <!-- Добавим теги для ключевых тем -->
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Kivy</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">GUI</span>
+                    </div>
+            
+                    <div class="mb-4">
+                        <a href="/mobile-dev/lab4.html" class="group bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            Начать выполнение
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+            
+                    <!-- Кнопка "Просмотр на GitHub" -->
+                    <div class="mt-4">
+                        <a href="https://github.com/vertigoDK/cef-labs/tree/main/mobile-apps/lab-4" target="_blank" class="group bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            <img src="../assets/svg/github.svg" alt="GitHub" class="w-5 h-5 mr-2"/>
+                            Просмотр на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- лабораторная работа 4 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-indigo-300">
+                <div class="h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                <div class="p-6">
+                    <!-- Добавим бейдж для номера лабораторной -->
+                    <div class="flex items-center mb-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Лабораторная работа №5</span>
+                        <span class="ml-2 text-gray-400 text-sm">~60 минут</span>
+                    </div>
+            
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 flex items-center">
+                        Работа с несколькими экранами: Меню и настройка
+                        <svg class="w-5 h-5 ml-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </h3>
+            
+                    <p class="text-gray-600 mb-4">Изучите разработку мобильных приложений через практические задания и реальные проекты.</p>
+                    
+                    <!-- Добавим теги для ключевых тем -->
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Python</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Kivy</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">GUI</span>
+                    </div>
+            
+                    <div class="mb-4">
+                        <a href="/mobile-dev/lab5.html" class="group bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            Начать выполнение
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+            
+                    <!-- Кнопка "Просмотр на GitHub" -->
+                    <div class="mt-4">
+                        <a href="https://github.com/vertigoDK/cef-labs/tree/main/mobile-apps/lab-5" target="_blank" class="group bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 text-sm font-medium shadow-md hover:shadow-lg flex items-center w-full">
+                            <img src="../assets/svg/github.svg" alt="GitHub" class="w-5 h-5 mr-2"/>
+                            Просмотр на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+
+
+</body>
+</html>
